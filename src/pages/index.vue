@@ -5,10 +5,11 @@
 // import { useAuth } from '@/stores/auth';
 // import { RouterLink } from 'vue-router';
 // const auth = useAuth();
-import ClassesComp from '@/components/classes/ClassesComp.vue';
+// import ClassesComp from '@/components/classes/ClassesComp.vue';
 </script>
 <template>
-    <ClassesComp />
+    HOME
+    <!-- <ClassesComp /> -->
     <!-- <DetailItemComp /> -->
     <!-- <HeaderComp /> -->
     <!-- <p v-if="auth.state.user">Logado como {{ auth.state.user?.email }} <button @click="auth.logout()">Sair</button></p>
