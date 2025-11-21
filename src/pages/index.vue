@@ -1,7 +1,7 @@
 <script setup>
 // import DetailItemComp from '@/components/detailItem/DetailItemComp.vue';
 // import HeaderComp from '@/components/header/HeaderComp.vue';
-
+// import Card from '@/components/card.vue';
 // import { useAuth } from '@/stores/auth';
 // import { RouterLink } from 'vue-router';
 // const auth = useAuth();
@@ -9,6 +9,7 @@
 </script>
 <template>
     HOME
+    <!-- <Card /> -->
     <!-- <ClassesComp /> -->
     <!-- <DetailItemComp /> -->
     <!-- <HeaderComp /> -->
