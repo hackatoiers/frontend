@@ -1,26 +1,9 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue"
 
-const textColor = ref("white")
-
-function scrolled(y) {
-  if (y > 50) {
-    textColor.value = "black"
-  } else {
-    textColor.value = "white"
-  }
-}
-
-function onScroll() {
-  scrolled(window.scrollY)
-}
-
-onMounted(() => window.addEventListener("scroll", onScroll))
-onUnmounted(() => window.removeEventListener("scroll", onScroll))
 </script>
 
 <template>
-    <div class="container" :style="{ color: textColor }">
+    <div class="container">
         <router-link to="/">Animal</router-link>
         <router-link to="/">Vegetal</router-link>
         <router-link to="/">Mineral</router-link>
@@ -36,5 +19,6 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll))
     flex-direction: row;
     gap: 30px;
     transition: 0.3s;
+    z-index: 10;
 }
 </style>

@@ -91,12 +91,12 @@ header {
     padding: 2rem;
     position: fixed;
     transition: 0.3s ease;
+    z-index: 10;
 }
 
 
 header.scrolled {
-    background-color: #00000000;
-    border-bottom: #554f48b6 1px solid;
+    background-color: #ffffff;
 }
 
 
