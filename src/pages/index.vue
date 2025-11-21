@@ -1,3 +1,12 @@
+<script setup>
+
+import HeaderComp from '@/components/header/HeaderComp.vue';
+
+</script>
 <template>
-    <div>HOME</div>
+    <HeaderComp />
 </template>
+<style scoped>
+
+
+</style>
