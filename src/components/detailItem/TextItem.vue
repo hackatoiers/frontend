@@ -3,29 +3,38 @@ const props = defineProps({
   item: {
     type: Object,
     required: false,
-    default: () => ({})
+    default: () => ({
+        categoria: 'Animal',
+        subcategoria: 'Ósseo humano',
+        title: 'Crânio', 
+        num: '8647',
+        weight: '450g',
+        desc: 'Conjunto de crânio humano, composto de 03 peças, de um indivíduo adulto, com fragmento de maxila esquerda com 04 dentes, mandibula com 12 dentes todos com desgaste acentuado. Três inserções numéricas em cada peça (um da coleção Tiburitus e outro do Instituto de Antropologia IA 16).',
+        sala: '102',
+        location: 'São Francisco do Sul - SC - Brasil'
+    })
   }
 })
 </script>
 <template>
     <div class="container-content">
         <div class="categorias">
-            <p>Animal</p><p> > </p><p>Ósseo humano</p>
+            <p>{{ item.categoria }}</p><p> > </p><p>{{ item.subcategoria }}</p>
         </div>
         <div class="title-num">
-            <p class="title">Crânio</p> 
-            <p class="num">N° 8647</p>
+            <p class="title">{{ item.title }}</p> 
+            <p class="num">N° {{ item.num }}</p>
         </div>
         <div class="weight">
-            <p>Peso: 450g</p>
+            <p>Peso: {{ item.weight }}</p>
         </div>
-        <div class="desc"><p>Conjunto de crânio humano, composto de 03 peças, de um indivíduo adulto, com fragmento de maxila esquerda com 04 dentes, mandibula com 12 dentes todos com desgaste acentuado. Três inserções numéricas em cada peça (um da coleção Tiburitus e outro do Instituto de Antropologia IA 16).</p></div>
+        <div class="desc"><p>{{ item.desc }}</p></div>
             <div class="sala">
-        <p class="bold">Sala:</p> <p>102</p>
+        <p class="bold">Sala:</p> <p>{{ item.sala }}</p>
     </div>
         <div class="bottom">
         <p class="detail">Ver detalhes</p>
-        <p class="loc"><img src="/public/map-pin.svg" alt=""> São Francisco do Sul - SC - Brasil</p>
+        <p class="loc"><img src="/public/map-pin.svg" alt="">{{ item.location }}</p>
     </div>
 
     </div>

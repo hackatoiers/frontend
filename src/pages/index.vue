@@ -1,10 +1,12 @@
 <script setup>
-
-import HeaderComp from '@/components/header/HeaderComp.vue';
+// import DetailItemComp from '@/components/detailItem/DetailItemComp.vue';
+// import HeaderComp from '@/components/header/HeaderComp.vue';
 
 </script>
 <template>
-    <HeaderComp />
+    HOME    
+    <!-- <DetailItemComp /> -->
+    <!-- <HeaderComp /> -->
 </template>
 <style scoped>
 
