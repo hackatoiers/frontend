@@ -27,4 +27,10 @@
     outline: none;
     font-size: 16px;
 }
+@media screen and (max-width: 1024px) {
+    .cont-input {
+        width: 100%;
+    }
+    
+}
 </style>

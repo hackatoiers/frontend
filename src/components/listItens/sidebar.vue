@@ -30,10 +30,10 @@ const categories = [
             <p>Filtro</p>
         </div>        
         <Select >
-    <SelectTrigger class="w-[240px]">
+    <SelectTrigger class="w-[285px]">
       <SelectValue placeholder="Matéria Prima" class="fe" />
     </SelectTrigger>
-    <SelectContent class="w-[240px]">
+    <SelectContent class="w-[285px]">
       <SelectGroup class="fe">
         <SelectLabel class="ai">Matéria Prima</SelectLabel>
         <SelectItem v-for="cat in categories" :key="cat.id" :value="cat.id" class="ai">
@@ -43,10 +43,10 @@ const categories = [
     </SelectContent>
   </Select>
   <Select >
-    <SelectTrigger class="w-[240px]">
+    <SelectTrigger class="w-[285px]">
       <SelectValue placeholder="Sub-tipo" class="fe" />
     </SelectTrigger>
-    <SelectContent class="w-[240px]">
+    <SelectContent class="w-[285px]">
       <SelectGroup class="fe">
         <SelectLabel class="ai">Sub-tipo</SelectLabel>
         <SelectItem v-for="cat in categories" :key="cat.id" :value="cat.id" class="ai">
@@ -56,10 +56,10 @@ const categories = [
     </SelectContent>
   </Select>
   <Select >
-    <SelectTrigger class="w-[240px]">
+    <SelectTrigger class="w-[285px]">
       <SelectValue placeholder="Localização" class="fe" />
     </SelectTrigger>
-    <SelectContent class="w-[240px]">
+    <SelectContent class="w-[285px]">
       <SelectGroup class="fe">
         <SelectLabel class="ai">Localização</SelectLabel>
         <div class="line"><label for="">N° sala:</label><input type="text" placeholder="000"></div>
@@ -69,10 +69,10 @@ const categories = [
     </SelectContent>
   </Select>
   <Select >
-    <SelectTrigger class="w-[240px]">
+    <SelectTrigger class="w-[285px]">
       <SelectValue placeholder="Estado" class="fe" />
     </SelectTrigger>
-    <SelectContent class="w-[240px]">
+    <SelectContent class="w-[285px]">
       <SelectGroup class="fe">
         <SelectLabel class="ai">Estado</SelectLabel>
         <div class="la"><input type="checkbox"><label for="">Bom</label></div>
@@ -149,5 +149,13 @@ const categories = [
     width: 100%;
     gap: .5rem;
     justify-content: start;
+}
+@media screen and (max-width: 1024px) {
+    .side {
+        width: 100%;
+        height: auto;
+        margin: 1rem 0;
+    }
+    
 }
 </style>

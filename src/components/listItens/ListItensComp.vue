@@ -24,4 +24,10 @@ section {
 .cont-itens {
     width: 100%;
 }
+@media screen and (max-width: 1024px) {
+    section {
+        grid-template-columns: 1fr;
+    }
+    
+}
 </style>
