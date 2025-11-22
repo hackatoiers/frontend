@@ -128,7 +128,7 @@ const users = [
 
 .container {
     width: 50%;
-    margin: 1rem auto;
+    margin: 3rem auto;
     height: 40px;
     padding: 1rem;
     display: flex;

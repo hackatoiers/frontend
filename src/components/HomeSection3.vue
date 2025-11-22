@@ -40,9 +40,9 @@
 
 <style scoped>
 .content {
-  width: 85%;
+  width: 80%;
   height: 445px;
-  margin: auto;
+  margin: 2rem auto;
   display: grid;
   grid-template-columns: 2fr 1fr; /* ← AQUI ESTÁ O 2fr / 1fr */
   gap: 75px;
