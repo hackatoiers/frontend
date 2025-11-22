@@ -1,4 +1,8 @@
 <script setup>
+import api from '@/plugins/api';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 const props = defineProps({
   item: {
     type: Object,
@@ -15,6 +19,13 @@ const props = defineProps({
     })
   }
 })
+
+const id = route.params.item_id;
+
+function handleDw() {   
+    const url = api.defaults.baseURL + `/items/${id}/pdf`;
+    window.open(url, '_blank');
+}
 </script>
 <template>
     <div class="container-content">
@@ -36,7 +47,7 @@ const props = defineProps({
 
     </div>
         <div class="bottom">
-        <p class="detail">Ver detalhes</p>
+        <p @click="handleDw" class="detail">Ver detalhes</p>
         <p class="loc"><img src="/public/map-pin.svg" alt="">{{ item.location.city + ' - ' + item.location.state + ' - ' + item.location.country }}</p>
     </div>
 

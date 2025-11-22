@@ -93,14 +93,11 @@ onMounted(async () => {
 
 <template>
 <form @submit.prevent="handleSubmit" class="container-cadastro-produto">
-
-    <!-- UPLOAD DE IMAGENS -->
     <div class="upload-box">
         <label>Imagens do Item</label>
         <input type="file" multiple accept="image/*" @change="handleImageUpload" />
     </div>
 
-    <!-- PREVIEW -->
     <div class="preview-container">
         <img 
             v-for="(img, index) in previewImages"
@@ -230,10 +227,6 @@ onMounted(async () => {
                 </select>
             </div>
         </div>
-
-        <!-- ================
-             CAMPOS DA LOCATION
-        ================== -->
         <div class="terceira-parte-form">
             <h3>Localização</h3>
 
@@ -320,7 +313,6 @@ onMounted(async () => {
 .segunda-parte-form,
 .terceira-parte-form {
     flex: 1 1 300px;
-    /* cresce, encolhe, base mínima 300px */
     display: flex;
     flex-direction: column;
     gap: 1rem;
