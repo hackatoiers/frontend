@@ -79,9 +79,6 @@ onBeforeUnmount(() => {
             <div class="concha-1">
                 <img class="imagem-concha" src="../../../public/concha-1.png">
             </div>
-            <div class="concha-2">
-                <img class="imagem-concha" src="../../../public/concha-2.png">
-            </div>
             <div class="concha-3">
                 <img class="imagem-concha" src="../../../public/concha-3.png">
             </div>
@@ -122,7 +119,6 @@ onBeforeUnmount(() => {
             </div>
         </div>
     </main>
-    <div style="height: 100vh;">a</div>
 </template>
 
 <style>

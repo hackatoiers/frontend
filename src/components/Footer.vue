@@ -1,50 +1,41 @@
 <script>
-export default {
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
+// export default {
+//   mounted() {
+//     window.addEventListener("scroll", this.handleScroll);
+//   },
 
-  beforeUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
+//   beforeUnmount() {
+//     window.removeEventListener("scroll", this.handleScroll);
+//   },
 
-  methods: {
-    handleScroll() {
-      const scroll = window.scrollY;
+//   methods: {
+//     handleScroll() {
+//       const scroll = window.scrollY;
 
-      // Fundo (quase parado)
-      this.$refs.montanha.style.transform =
-        `translateY(${scroll * 0.05}px)`;
+//       // Fundo (quase parado)
+//       this.$refs.montanha.style.transform =
+//         `translateY(${scroll * 0.05}%)`;
 
-      // Texto (sobe mais rápido)
-      this.$refs.texto.style.transform =
-        `translateY(${scroll * -0.52}px)`;
+//       // Texto (sobe mais rápido)
+//       this.$refs.texto.style.transform =
+//         `translateY(${scroll * - 10}%)`;
 
-      // Pedra
-      this.$refs.pedra.style.transform =
-        `translateY(${scroll * -0.12}px)`;
+//       // Pedra
+//       this.$refs.pedra.style.transform =
+//         `translateY(${scroll * 12}%)`;
 
-      // Grama
-      this.$refs.grama.style.transform =
-        `translateY(${scroll * -0.35}px)`;
-    },
-  },
-};
+//       // Grama
+//       this.$refs.grama.style.transform =
+//         `translateY(${scroll * - 30}%)`;
+//     },
+//   },
+// };
 </script>
 
 <template>
   <div>
 
-    <!-- SEÇÃO SUPERIOR APAGAR DEPOIS-->
-    <div class="top-content">
-      <h1>Conteúdo Inicial</h1>
-      <p>Role para baixo para ver o efeito parallax do footer.</p>
-    </div>
-
     <footer class="footer">
-      <div class="layer montanha" ref="montanha">
-        <img src="/public/Fundo.png" alt="Montanha" />
-      </div>
       <div class="layer texto" ref="texto">
         <span>SAMBAQUI</span>
       </div>
@@ -69,7 +60,9 @@ export default {
           </div>
         </div>
 
-        <p>©2025 - Nenhum direito reservado</p>
+         <div class="layer texto" ref="texto">
+        <span>SAMBAQUI</span>
+      </div>
       </div>
 
     </footer>
@@ -95,7 +88,7 @@ export default {
 .footer {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 60vh;
   overflow: hidden;
 }
 .layer {
@@ -112,10 +105,10 @@ export default {
   width: 100%;
   height: 100vh;
   object-fit: cover;
-  margin-bottom: -70px;
+  margin-bottom: -300px;
 }
 .texto {
-  bottom: -30vh;
+  bottom: 5vh;
   width: 100%;
   text-align: center;
   z-index: 2;
@@ -123,9 +116,9 @@ export default {
 
 .texto span {
   pointer-events: none;
-  font-size: 10vw;
+  font-size: 7vw;
   font-weight: 900;
-  color: #fff;
+  color: white;
   font-family: "Bodoni Moda", serif;
   text-decoration: border(1px solid);
 }
@@ -139,7 +132,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  margin-bottom: -100px;
+  margin-bottom: 0px;
 }
 
 .grama p {

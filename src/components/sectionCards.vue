@@ -39,10 +39,12 @@ const cards = props.cards
 
 <style scoped>
 .section-container {
+  width: 80%;
+  margin: 0 auto 2rem auto;
   display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 40px;
+    gap: 5rem;
 }
 
 /* Mobile — 1 card por linha */
