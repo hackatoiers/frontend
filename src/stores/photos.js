@@ -2,20 +2,20 @@ import { base64Serializer } from '@/utils/store/serializers/base64'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useStorage } from '@vueuse/core'
-import CollectionService from '@/services/collections'
+import PhotosService from '@/services/photos'
 
-export const useCollectionStore = defineStore('collection', () => {
+export const usePhotosStore = defineStore('photos', () => {
     const state = {
-        collections: useStorage('cache_collections', [], localStorage, { serializer: base64Serializer() }),
-        currentCollection: ref(null),
+        photos: useStorage('cache_photos', [], localStorage, { serializer: base64Serializer() }),
+        currentPhotos: ref(null),
         checked: ref(false),
         meta: ref({}),
     }
 
     async function fetchAll(page = 1, perPage = 10) {
         try {
-            const response = await CollectionService.fetchAll(page, perPage)
-            state.collections.value = response.data.data
+            const response = await PhotosService.fetchAll(page, perPage)
+            state.photos.value = response.data.data
             state.meta.value = response.data.meta
             state.checked.value = true
             return response
@@ -27,8 +27,8 @@ export const useCollectionStore = defineStore('collection', () => {
 
     async function fetchById(id) {
         try {
-            const response = await CollectionService.fetchById(id)
-            state.currentCollection.value = response.data
+            const response = await PhotosService.fetchById(id)
+            state.currentPhotos.value = response.data
             return response
         } catch (err) {
             console.error(err)
@@ -38,7 +38,7 @@ export const useCollectionStore = defineStore('collection', () => {
 
     async function create(data) {
         try {
-            const response = await CollectionService.create(data)
+            const response = await PhotosService.create(data)
             await fetchAll()
             return response
         } catch (err) {
@@ -49,7 +49,7 @@ export const useCollectionStore = defineStore('collection', () => {
 
     async function update(data) {
         try {
-            const response = await CollectionService.update(data)
+            const response = await PhotosService.update(data)
             await fetchAll()
             return response
         } catch (err) {
@@ -60,7 +60,7 @@ export const useCollectionStore = defineStore('collection', () => {
 
     async function remove(id) {
         try {
-            const response = await CollectionService.delete(id)
+            const response = await PhotosService.delete(id)
             await fetchAll()
             return response
         } catch (err) {

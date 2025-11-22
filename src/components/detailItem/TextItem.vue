@@ -19,22 +19,25 @@ const props = defineProps({
 <template>
     <div class="container-content">
         <div class="categorias">
-            <p>{{ item.categoria }}</p><p> > </p><p>{{ item.subcategoria }}</p>
+            <p>{{ item.sub_type?.material.name }}</p><p> > </p><p>{{ item.sub_type?.name }}</p>
         </div>
         <div class="title-num">
             <p class="title">{{ item.title }}</p> 
-            <p class="num">N° {{ item.num }}</p>
+            <p class="num">N° {{ item.number }}</p>
         </div>
         <div class="weight">
-            <p>Peso: {{ item.weight }}</p>
+            <p>Peso: {{ item.weight }}g</p>
         </div>
-        <div class="desc"><p>{{ item.desc }}</p></div>
+        <div class="desc"><p>{{ item.description }}</p></div>
             <div class="sala">
-        <p class="bold">Sala:</p> <p>{{ item.sala }}</p>
+        <p class="bold">Sala:</p> <p>{{ item.location.room }}</p>
+        <p class="bold">Estante:</p> <p>{{ item.location.shelf }}</p>
+        <p class="bold">Prateleira:</p> <p>{{ item.location.bookcase }}</p>
+
     </div>
         <div class="bottom">
         <p class="detail">Ver detalhes</p>
-        <p class="loc"><img src="/public/map-pin.svg" alt="">{{ item.location }}</p>
+        <p class="loc"><img src="/public/map-pin.svg" alt="">{{ item.location.city + ' - ' + item.location.state + ' - ' + item.location.country }}</p>
     </div>
 
     </div>

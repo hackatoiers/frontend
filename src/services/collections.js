@@ -3,7 +3,7 @@ import api from '@/plugins/api'
 class CollectionService {
     async fetchAll(page = 1, perPage = 10) {
         try {
-            const response = await api.get(`/collection`, {
+            const response = await api.get(`/collections`, {
                 params: {
                     page,
                     per_page: perPage
@@ -18,7 +18,7 @@ class CollectionService {
 
     async fetchById(id) {
         try {
-            const response = await api.get(`/collection/${id}`)
+            const response = await api.get(`/collections/${id}`)
             return response
         } catch (error) {
             console.error(error)
@@ -28,7 +28,7 @@ class CollectionService {
 
     async create(data) {
         try {
-            const response = await api.post(`/collection`, data)
+            const response = await api.post(`/collections`, data)
             return response
         } catch (error) {
             console.error(error)
@@ -39,7 +39,7 @@ class CollectionService {
     async update(data) {
         try {
             const { id, ...formData } = data
-            const response = await api.put(`/collection/${id}`, formData)
+            const response = await api.put(`/collections/${id}`, formData)
             return response
         } catch (error) {
             console.error(error)
@@ -49,7 +49,7 @@ class CollectionService {
 
     async delete(id) {
         try {
-            const response = await api.delete(`/collection/${id}`)
+            const response = await api.delete(`/collections/${id}`)
             return response
         } catch (error) {
             console.error(error)

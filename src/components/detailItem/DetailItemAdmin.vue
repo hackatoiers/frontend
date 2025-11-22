@@ -1,12 +1,29 @@
 <script setup>
 import CarrousselImg from '@/components/detailItem/CarrousselImg.vue';
 import TextItem from '@/components/detailItem/TextItem.vue';
+import { useItemStore } from '@/stores/items';
+import { computed, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const itemStore = useItemStore();
+
+const id = route.params.item_id;
+
+onMounted(async () => {
+    await itemStore.fetchById(id);
+
+});
+
+const slides = computed(() => {
+    return itemStore.state.currentItem?.data?.photos || [];
+});
 
 </script>
 <template>
     <section>
-        <CarrousselImg :slides=slides />
-        <TextItem />
+        <CarrousselImg :slides="slides" />
+        <TextItem :item="itemStore.state.currentItem?.data" />
         <span></span>
         <div class="buttons">
         <button class="reserve">Reservado</button>
