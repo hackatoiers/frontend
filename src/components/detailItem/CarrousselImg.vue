@@ -77,9 +77,9 @@ const trackStyle = computed(() => ({
 }
 
 .slide-content {
-    width: 100%;
+  width: 100%;
   height: 30rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,7 +99,7 @@ const trackStyle = computed(() => ({
   height: 40px;
   top: 50%;
   transform: translateY(-50%);
-  border: 1px solid #554F48;
+  /* border: 1px solid #554F48; */
   vertical-align: middle;
   font-size: 20px;
   cursor: pointer;

@@ -4,6 +4,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import HeaderTitle from '@/components/header/HeaderTitle.vue';
 import HeaderButton from '@/components/header/HeaderButton.vue';
 import HeaderNav from '@/components/header/HeaderNav.vue';
+import { useAuth } from '@/stores/auth';
+
+const authStore = useAuth();
 
 const props = defineProps({
     forceScrolled: {
@@ -70,7 +73,7 @@ onUnmounted(() => {
         </div>
 
         <div class="header-nav">
-            <HeaderNav />
+            <HeaderNav :islogged="authStore.state.checked" />
         </div>
 
         <div class="header-dropdown">
@@ -80,11 +83,11 @@ onUnmounted(() => {
                 <div v-if="isOpen" class="dropdown-panel">
                     <p class="dropdown-label">Acervo</p>
 
-                    <router-link to="/" class="dropdown-item">Animal</router-link>
-                    <router-link to="/" class="dropdown-item">Mineral</router-link>
-                    <router-link to="/" class="dropdown-item">Vegetal</router-link>
-                    <router-link to="/" class="dropdown-item">Outro</router-link>
-                    <router-link to="/" class="dropdown-item">Tudo</router-link>
+                    <router-link to="/itens" class="dropdown-item">Animal</router-link>
+                    <router-link to="/itens" class="dropdown-item">Mineral</router-link>
+                    <router-link to="/itens" class="dropdown-item">Vegetal</router-link>
+                    <router-link to="/itens" class="dropdown-item">Outro</router-link>
+                    <router-link to="/itens" class="dropdown-item">Tudo</router-link>
 
                 </div>
             </transition>

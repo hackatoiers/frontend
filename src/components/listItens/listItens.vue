@@ -28,7 +28,7 @@ watch(
     </div>
 
     <div class="list">
-        <Card v-for="item in items" :key="item.id" :title="item.name" :description="item.description"
+        <Card v-for="item in items" :key="item.id" :id="item.id" :title="item.name" :description="item.description"
             :image="item.photos?.[0] || '/map-pin.svg'" :descriptionLimit="50" />
     </div>
 </template>
