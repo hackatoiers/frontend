@@ -1,11 +1,25 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from "vue";
 
+const conchas = ref(null);
+
+
 const interactiveEl = ref(null);
 
 let mouseMoveHandler;
+let handleScroll;
 
 onMounted(() => {
+    // scroll handler
+    handleScroll = () => {
+        const c1 = conchas.value;
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        if (c1) c1.style.transform = `translateY(${scrollY * 0.2}px)`;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // interactive bubble
     const interBubble = interactiveEl.value;
     let curX = 0;
     let curY = 0;
@@ -16,7 +30,9 @@ onMounted(() => {
         curX += (tgX - curX) / 20;
         curY += (tgY - curY) / 20;
 
-        interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+        if (interBubble) {
+            interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+        }
 
         requestAnimationFrame(move);
     };
@@ -31,12 +47,17 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-    window.removeEventListener("mousemove", mouseMoveHandler);
+    if (handleScroll) {
+        window.removeEventListener("scroll", handleScroll);
+    }
+    if (mouseMoveHandler) {
+        window.removeEventListener("mousemove", mouseMoveHandler);
+    }
 });
 </script>
 
 <template>
-    <div>
+    <main>
         <div class="text-container">
             <div class="text-content">
                 <div class="title-home">
@@ -44,7 +65,7 @@ onBeforeUnmount(() => {
                         Bem Vindo
                     </h1>
                 </div>
-                
+
                 <div class="description-home">
                     <p class="text-home">Sambaquis são sítios arqueológicos formados por conchas e vestígios deixados
                         por
@@ -54,7 +75,7 @@ onBeforeUnmount(() => {
                 </div>
             </div>
         </div>
-        <div class="concha-container">
+        <div class="concha-container" ref="conchas">
             <div class="concha-1">
                 <img class="imagem-concha" src="../../../public/concha-1.png">
             </div>
@@ -67,14 +88,14 @@ onBeforeUnmount(() => {
             <div class="concha-4">
                 <img class="imagem-concha" src="../../../public/concha-4.png">
             </div>
-             <div class="concha-5">
+            <div class="concha-5">
                 <img class="imagem-concha" src="../../../public/concha-2.png">
             </div>
             <div class="concha-6">
                 <img class="imagem-concha" src="../../../public/concha-3.png">
             </div>
         </div>
-
+        <img class="texture" src="/public/Textura areia.png" alt="">
         <div class="gradient-overlay"></div>
 
         <div class="gradient-bg">
@@ -100,12 +121,30 @@ onBeforeUnmount(() => {
                 <div class="interactive" ref="interactiveEl"></div>
             </div>
         </div>
-    </div>
+    </main>
+    <div style="height: 100vh;">a</div>
 </template>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
+main {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.1;
+}
 
 .bodoni-moda {
     font-family: "Bodoni Moda", serif;
@@ -113,9 +152,10 @@ onBeforeUnmount(() => {
     font-weight: 400;
     font-style: normal;
     font-size: 240px;
-    color: black;
+    color: rgb(0, 0, 0);
     width: 100%;
     text-align: center;
+    z-index: 1000;
 }
 
 .concha-container {
@@ -195,7 +235,7 @@ onBeforeUnmount(() => {
 
 html,
 body {
-    font-family: 'Dongle', sans-serif;
+  font-family: "Inter", sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -226,29 +266,36 @@ body {
     align-items: center;
     font-size: 96px;
     color: white;
-    opacity: 0.8;
+
     user-select: none;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 :root {
-    /* Fundo mais quente e amarelado */
-    --color-bg1: rgb(242, 204, 117);   /* amarelo areia quente */
-    --color-bg2: rgb(232, 180, 85);    /* amarelo queimado / areia molhada */
+    --color-bg1: rgb(255, 222, 160);
+    /* areia clara quente */
+    --color-bg2: rgb(245, 205, 130);
+    /* areia mais densa */
 
-    /* Blobs em paleta de areia */
-    --color1: 230, 200, 140;  /* areia média */
-    --color2: 210, 175, 115;  /* areia quente */
-    --color3: 245, 220, 150;  /* bege dourado */
-    --color4: 190, 160, 110;  /* areia escura */
-    --color5: 255, 215, 140;  /* amarelo pastel areia */
+    /* BLOB G1 — Areia muito clara (quase branca) */
+    --color1: 255, 245, 220;
 
-    /* Blob interativo mais quente */
-    --color-interactive: 240, 200, 120;
+    /* BLOB G2 — Areia clara */
+    --color2: 242, 225, 185;
 
-    --circle-size: 80%;
-    --blending: soft-light;
-}   
+    /* BLOB G3 — Areia média dourada */
+    --color3: 230, 205, 160;
+
+    /* BLOB G4 — Areia profunda, puxando para o ocre */
+    --color4: 210, 180, 130;
+
+    /* BLOB G5 — Areia escura / terracota suave */
+    --color5: 185, 145, 95;
+
+    /* BLOB INTERATIVO — Areia muito clara destacada */
+    --color-interactive: 255, 250, 235;
+}
+
 
 .gradient-bg {
     width: 100vw;
@@ -387,6 +434,76 @@ body {
 
     100% {
         transform: translateX(-50%) translateY(-10%);
+    }
+}
+
+@media (max-width: 768px) {
+    .bodoni-moda {
+        font-size: 120px;
+        text-align: left;
+
+    }
+
+    .description-home {
+        width: 80%;
+        margin-left: 1rem;
+    }
+
+    .text-home {
+        font-weight: 300px;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .concha-container {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+    }
+
+    .concha-container {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+    }
+
+    .concha-1 {
+        grid-column: 6;
+        grid-row: 5;
+        justify-self: end;
+    }
+
+    .concha-2 {
+        grid-column: 3;
+        grid-row: 5; 
+        justify-self: start;
+    }
+
+    .concha-3 {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: start;
+    }
+
+    .concha-4 {
+        grid-column: 6;
+        grid-row: 2;
+        justify-self: end;
+    }
+
+    .concha-5 {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: start;
+    }
+
+    .concha-6 {
+        grid-column: 5;
+        grid-row: 1;
+        justify-self: end;
+    }
+
+    .concha-container img {
+        width: 140%;
+        height: 140%;
     }
 }
 </style>

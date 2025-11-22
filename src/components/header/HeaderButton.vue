@@ -33,7 +33,7 @@ button:hover {
 
 /* --------- ESTILO QUANDO SCROLLED --------- */
 .scrolled-btn {
-    background-color: #554F48;
+    background-color: #000000;
     color: rgb(255, 255, 255);
     border: none;
 }
@@ -41,7 +41,7 @@ button:hover {
 /* --------- HOVER QUANDO SCROLLED --------- */
 .scrolled-btn:hover {
     background-color: rgba(0, 0, 0, 0);
-    color: #554F48;
-    border: 1px solid #554F48;
+    color: #000000;
+    border: 1px solid #000000;
 }
 </style>
