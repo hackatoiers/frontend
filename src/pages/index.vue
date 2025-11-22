@@ -12,12 +12,12 @@
 </script>
 <template>
 HOME
-    <!--<CadastroPComp /> -->
+    <!-- <CadastroPComp /> -->
     <!-- <Card /> -->
     <!-- <ClassesComp /> -->
     <!-- <DetailItemComp /> -->
     <!-- <HeaderComp /> -->
-     <!--<Footer /> -->
+     <!-- <Footer /> -->
     <!-- <p v-if="auth.state.user">Logado como {{ auth.state.user?.email }} <button @click="auth.logout()">Sair</button></p>
     <RouterLink to="/auth/login" v-else>Login</RouterLink> -->
 </template>
