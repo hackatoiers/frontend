@@ -12,11 +12,14 @@
 // import CadastroPComp from '@/components/cadastrar-produto/CadastroPComp.vue';
 // import SectionCards from '@/components/sectionCards.vue';
 // import ModalReservaComp from '@/components/modal-reserva/ModalReservaComp.vue';
+// import Home from '@/components/home/HomeView.vue';
 </script>
 <template>
-HOME
-<!-- <SectionCards /> -->
-<!--<DetailItemAdmin/> -->
+    HOME
+    <!-- <HeaderComp /> -->
+    <!-- <Home /> -->
+    <!-- <SectionCards /> -->
+    <!--<DetailItemAdmin/> -->
     <!--<CadastroPComp /> -->
     <!-- <CadastroPComp /> -->
     <!-- <CadastroPComp /> -->
@@ -24,8 +27,7 @@ HOME
     <!-- <Card /> -->
     <!-- <ClassesComp /> -->
     <!-- <DetailItemComp /> -->
-    <!-- <HeaderComp /> -->
-     <!-- <Footer /> -->
+    <!-- <Footer /> -->
     <!-- <p v-if="auth.state.user">Logado como {{ auth.state.user?.email }} <button @click="auth.logout()">Sair</button></p>
     <RouterLink to="/auth/login" v-else>Login</RouterLink> -->
 </template>
@@ -34,5 +36,4 @@ HOME
     cursor: pointer;
     background-color: red;
 } */
-
 </style>
