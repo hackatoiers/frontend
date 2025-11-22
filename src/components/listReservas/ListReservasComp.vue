@@ -5,40 +5,56 @@ const users = [
     {
         id: 1,
         email: 'Fofuxo@gmail.com',
+        entrega: '12/12/2012',
+        devolucao: '19/12/2012',
     },
     {
         id: 2,
         email: 'Fofuxo@gmail.com',
+        entrega: '12/12/2012',
+        devolucao: '19/12/2012',
     },
     {
         id: 3,
         email: 'Fofuxo@gmail.com',
+        entrega: '12/12/2012',
+        devolucao: '19/12/2012',
     },
     {
         id: 4,
         email: 'Fofuxo@gmail.com',
+        entrega: '12/12/2012',
+        devolucao: '19/12/2012',
     },
     {
         id: 5,
         email: 'Fofuxo@gmail.com',
+        entrega: '12/12/2012',
+        devolucao: '19/12/2012',
     },
     {
         id: 6,
         email: 'Fofuxo@gmail.com',
+        entrega: '12/12/2012',
+        devolucao: '19/12/2012',
     },
     {
         id: 7,
         email: 'Fofuxo@gmail.com',
+        entrega: '12/12/2012',
+        devolucao: '19/12/2012',
     },
     {
         id: 8,
         email: 'Fofuxo@gmail.com',
+        entrega: '12/12/2012',
+        devolucao: '19/12/2012',
     },
 ]        
 </script>
 <template>
 <div class="container">
-    <p class="text">Usuários</p>
+    <p class="text">Reservas</p>
     <div class="line-input">
         <img src="/search.svg" alt="">
         <input type="text" placeholder="Buscar usuário...">
@@ -49,8 +65,9 @@ const users = [
             <p class="p1">Email</p>
             <div class="line"></div>
             <p class="p2">{{ user.email }}</p>
+            <p class="a">{{ user.entrega }} - {{ user.devolucao }}</p>
             <div class="btns">
-                <button class="more">ver mais</button>
+                <button class="more">ver</button>
                 <button class="del"><img src="/trash-2.svg" alt=""></button>
             </div>
         </div>
@@ -58,6 +75,11 @@ const users = [
 </template>
 
 <style scoped>
+.a{
+    font-weight: lighter;
+    height: 100%;
+    padding: 1rem;
+}
 .p2{
     width: 60%;
     font-weight: lighter;

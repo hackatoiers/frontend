@@ -1,6 +1,5 @@
 <script setup>
-import DetailItemAdmin from '@/components/detailItem/DetailItemAdmin.vue';
-
+// import DetailItemAdmin from '@/components/detailItem/DetailItemAdmin.vue';
 //import HomeSection3 from '@/components/HomeSection3.vue';
 // import DetailItemComp from '@/components/detailItem/DetailItemComp.vue';
 // import HeaderComp from '@/components/header/HeaderComp.vue';
@@ -11,16 +10,19 @@ import DetailItemAdmin from '@/components/detailItem/DetailItemAdmin.vue';
 // const auth = useAuth();
 // import ClassesComp from '@/components/classes/ClassesComp.vue';
 // import CadastroPComp from '@/components/cadastrar-produto/CadastroPComp.vue';
+// import ModalReservaComp from '@/components/modal-reserva/ModalReservaComp.vue';
 </script>
 <template>
 HOME
-<DetailItemAdmin/>
+<!--<DetailItemAdmin/> -->
     <!--<CadastroPComp /> -->
+    <!-- <CadastroPComp /> -->
+    <!-- <ModalReservaComp :open="true" /> -->
     <!-- <Card /> -->
     <!-- <ClassesComp /> -->
     <!-- <DetailItemComp /> -->
     <!-- <HeaderComp /> -->
-     <!--<Footer /> -->
+     <!-- <Footer /> -->
     <!-- <p v-if="auth.state.user">Logado como {{ auth.state.user?.email }} <button @click="auth.logout()">Sair</button></p>
     <RouterLink to="/auth/login" v-else>Login</RouterLink> -->
 </template>
