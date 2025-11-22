@@ -14,7 +14,7 @@ onMounted(() => {
     handleScroll = () => {
         const c1 = conchas.value;
         const scrollY = window.scrollY || window.pageYOffset || 0;
-        if (c1) c1.style.transform = translateY(${scrollY * 0.2}px);
+        if (c1) c1.style.transform = `translateY(${scrollY * 0.2}px)`;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -31,7 +31,7 @@ onMounted(() => {
         curY += (tgY - curY) / 20;
 
         if (interBubble) {
-            interBubble.style.transform = translate(${Math.round(curX)}px, ${Math.round(curY)}px);
+            interBubble.style.transform = `translate(${ Math.round(curX) }px, ${ Math.round(curY) }px)`;
         }
 
         requestAnimationFrame(move);
@@ -235,7 +235,7 @@ main {
 
 html,
 body {
-  font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -473,7 +473,7 @@ body {
 
     .concha-2 {
         grid-column: 3;
-        grid-row: 5; 
+        grid-row: 5;
         justify-self: start;
     }
 

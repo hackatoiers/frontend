@@ -5,15 +5,29 @@ import HeaderTitle from '@/components/header/HeaderTitle.vue';
 import HeaderButton from '@/components/header/HeaderButton.vue';
 import HeaderNav from '@/components/header/HeaderNav.vue';
 
+const props = defineProps({
+    forceScrolled: {
+        type: Boolean,
+        default: false
+}})
+
 const isScrolled = ref(false)
 const isOpen = ref(false)
 
 const updateScrollState = () => {
+    // Se a página pediu para o header ficar sempre scrolled
+    if (props.forceScrolled) {
+        isScrolled.value = true
+        return
+    }
+
+    // Se o menu estiver aberto
     if (isOpen.value) {
         isScrolled.value = true
         return
     }
 
+    // Comportamento normal
     isScrolled.value = window.scrollY > 50
 }
 

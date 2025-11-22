@@ -16,7 +16,8 @@
 </script>
 <template>
     HOME
-    <!-- <Home />-->
+    <!-- <HeaderComp /> -->
+    <!-- <Home /> -->
     <!-- <SectionCards /> -->
     <!--<DetailItemAdmin/> -->
     <!--<CadastroPComp /> -->
@@ -26,7 +27,6 @@
     <!-- <Card /> -->
     <!-- <ClassesComp /> -->
     <!-- <DetailItemComp /> -->
-    <!-- <HeaderComp /> -->
     <!-- <Footer /> -->
     <!-- <p v-if="auth.state.user">Logado como {{ auth.state.user?.email }} <button @click="auth.logout()">Sair</button></p>
     <RouterLink to="/auth/login" v-else>Login</RouterLink> -->
