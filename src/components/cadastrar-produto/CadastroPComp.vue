@@ -1,174 +1,287 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+
 import { useItemStore } from '@/stores/items';
 import { useCollectionStore } from '@/stores/collections';
 import { useSubTypeStore } from '@/stores/subtype';
-import { onMounted } from 'vue';
+import { useLocationsStore } from '@/stores/locations';
+import { usePhotosStore } from '@/stores/photos';
+import { useEhtnicGroupsStore } from '@/stores/ethnicGorups';
 
 const itemStore = useItemStore();
-const collectionStore = useCollectionStore();
 const subTypeStore = useSubTypeStore();
+const collectionStore = useCollectionStore();
+const locationsStore = useLocationsStore();
+const photoStore = usePhotosStore();
+const ethnicGroupsStore = useEhtnicGroupsStore();
 
-const form = {
+const form = ref({
     name: '',
     description: '',
-    location: '',
-    provenance: '',
-    condition: '',
+    number: '',
+    
+    length: null,
+    height: null,
+    width: null,
     weight: null,
-    materialType: '',
-    subGroup: ''
-};
+
+    archeological_site: '',
+    technic: '',
+    reference: '',
+
+    integrity: '',
+    conservation_state: '',
+    conservation_detail: '',
+
+    location_id: null,
+    subtype_id: null,
+    collection_id: null,
+    ethnic_group_id: null,
+});
+
+const locationForm = ref({
+    name: '',
+    city: '',
+    state: '',
+    country: '',
+    room: '',
+    shelf: '',
+    bookcase: '',
+});
+
+const images = ref([]);
+const previewImages = ref([]);
+
+function handleImageUpload(e) {
+    const files = Array.from(e.target.files);
+    images.value.push(...files);
+
+    files.forEach(file => {
+        previewImages.value.push(URL.createObjectURL(file));
+    });
+}
+
+async function handleSubmit() {
+    try {
+        const location = await locationsStore.create(locationForm.value);
+        form.value.location_id = location.data.data.id;
+
+        const item = await itemStore.create(form.value);
+
+        for (const img of images.value) {
+            const fd = new FormData();
+            fd.append('photo', img);
+            fd.append('item_id', item.data.data.id);
+
+            await photoStore.create(fd);
+        }
+
+        alert("Item criado com sucesso!");
+
+    } catch (err) {
+        console.error(err);
+        alert("Erro ao cadastrar");
+    }
+}
 
 onMounted(async () => {
     await collectionStore.fetchAll();
     await subTypeStore.fetchAll();
+    await ethnicGroupsStore.fetchAll();
 });
-
 </script>
 
 <template>
-    <form class="container-cadastro-produto">
-        <div class="dados-cadastro-produto">
-            <div class="primeira-parte-form">
-                <div class="imagem-primaria-container">
-                    <div class="imagem-primaria">
-                        <img src="../../../public/uplod-img.png" alt="">
-                    </div>
-                </div>
-                <div class="imagens-secundarias-container">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div class="segunda-parte-form">
-                <div>
-                    <label>Nome</label>
-                    <input type="text" placeholder="Escreva o nome aqui" />
-                </div>
-                <div>
-                    <label>Descrição</label>
-                    <input class="desc" type="text" placeholder="Escreva sua descrição aqui" />
-                </div>
-                <div>
-                    <label>Numero*</label>
-                    <input class="desc" type="text" placeholder="Escreva o numero aqui" />
-                </div>
-                <div>
-                    <label>Comprimento</label>
-                    <input type="text" placeholder="Escreva o comprimento aqui" />
-                </div>
-                <div>
-                    <label>Largura</label>
-                    <input type="text" placeholder="Escreva o comprimento aqui" />
-                </div>
-                <div>
-                    <label>Altura</label>
-                    <input type="text" placeholder="Escreva a altura aqui" />
-                </div>
-                <div>
-                    <label>Cidade</label>
-                    <input type="text" placeholder="Escreva a cidade aqui" />
-                </div>
-                <div>
-                    <label>Estado</label>
-                    <input type="text" placeholder="Escreva o estado aqui" />
-                </div>
-                <div>
-                    <label>País</label>
-                    <input type="text" placeholder="Escreva o país aqui" />
-                </div>
+<form @submit.prevent="handleSubmit" class="container-cadastro-produto">
 
-                <div class="select-option">
-                    <label class="b">Estado</label>
-                    <label class="radio-label">
-                        <input type="radio" name="estado" value="ruim">
-                        Ruim
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="estado" value="regular">
-                        Regular
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="estado" value="bom">
-                        Bom
-                    </label>
-                </div>
+    <!-- UPLOAD DE IMAGENS -->
+    <div class="upload-box">
+        <label>Imagens do Item</label>
+        <input type="file" multiple accept="image/*" @change="handleImageUpload" />
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="preview-container">
+        <img 
+            v-for="(img, index) in previewImages"
+            :key="index"
+            :src="img"
+            class="preview-img"
+        />
+    </div>
+
+    <div class="dados-cadastro-produto">
+
+        <div class="segunda-parte-form">
+
+            <div>
+                <label>Nome*</label>
+                <input v-model="form.name" required />
             </div>
 
-            <div class="terceira-parte-form">
-                <div>
-                    <div>
-                        <label>Peso</label>
-                        <input type="number" placeholder="Escreva o peso aqui" />
-                    </div>
-                </div>
-                <div class="selects-terceira-parte">
-                    <div class="custom-select">
-                        <select name="estado1">
-                            <option value="" disabled selected>Selecione o material</option>
-                            <option value="ruim">Animal</option>
-                            <option value="regular">Vegetal</option>
-                            <option value="bom">Mineral</option>
-                        </select>
-                    </div>
+            <div>
+                <label>Descrição</label>
+                <input v-model="form.description" />
+            </div>
 
-                    <div class="custom-select">
-                        <select name="estado2">
-                            <option value="" disabled selected>Sub-Grupo</option>
-                            <option v-for="subtype in subTypeStore.state.subtypes" :key="subtype.id" :value="subtype.id">
-                                {{ subtype.name }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label>Sala</label>
-                    <input type="text" placeholder="Escreva a sala aqui" />
-                </div>
-                <div>
-                    <label>Estante</label>
-                    <input type="text" placeholder="Escreva a estante aqui" />
-                </div>
-                <div>
-                    <label>Prateleira</label>
-                    <input type="text" placeholder="Escreva a prateleira aqui" />
-                </div>
-                <div>
-                    <label>Tecnico</label>
-                    <input type="text" placeholder="Escreva o nome do técnico aqui" />
-                </div>
+            <div>
+                <label>Número*</label>
+                <input v-model="form.number" required />
+            </div>
 
-                <div>
-                    <label>Referencia</label>
-                    <input type="text" placeholder="Escreva a referência aqui" />
-                </div>
-                <div>
-                    <label>Sitio</label>
-                    <input type="text" placeholder="Escreva o sitio aqui" />
-                </div>
-                <div class="custom-select">
-                    <select name="estado1">
-                        <option value="" disabled selected>Selecione a coleção</option>
-                        <option v-for="collection in collectionStore.state.collections" :key="collection.id" :value="collection.id">
-                            {{ collection.name }}
-                        </option>
-                    </select>
-                </div>
+            <div>
+                <label>Comprimento</label>
+                <input type="number" v-model.number="form.length" />
+            </div>
 
+            <div>
+                <label>Largura</label>
+                <input type="number" v-model.number="form.width" />
+            </div>
+
+            <div>
+                <label>Altura</label>
+                <input type="number" v-model.number="form.height" />
+            </div>
+
+            <div>
+                <label>Peso*</label>
+                <input type="number" v-model.number="form.weight" required />
+            </div>
+
+            <div>
+                <label>Sítio Arqueológico*</label>
+                <input v-model="form.archeological_site" required />
+            </div>
+
+            <div>
+                <label>Técnica*</label>
+                <input v-model="form.technic" required />
+            </div>
+
+            <div>
+                <label>Referência*</label>
+                <input v-model="form.reference" required />
+            </div>
+
+            <div>
+                <label>Integridade*</label>
+                <select v-model="form.integrity" required>
+                    <option disabled value="">Selecione</option>
+                    <option value="fragmented">Fragmentado</option>
+                    <option value="regular">Regular</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Estado de Conservação*</label>
+                <select v-model="form.conservation_state" required>
+                    <option disabled value="">Selecione</option>
+                    <option value="good">Bom</option>
+                    <option value="regular">Regular</option>
+                    <option value="bad">Ruim</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Detalhes de Conservação*</label>
+                <input v-model="form.conservation_detail" required />
+            </div>
+
+            <div>
+                <label>Subtipo*</label>
+                <select v-model="form.subtype_id" required>
+                    <option disabled value="">Selecione</option>
+                    <option
+                        v-for="s in subTypeStore.state.subtype"
+                        :key="s.id"
+                        :value="s.id"
+                    >
+                        {{ s.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Coleção*</label>
+                <select v-model="form.collection_id" required>
+                    <option disabled value="">Selecione</option>
+                    <option
+                        v-for="c in collectionStore.state.collections"
+                        :key="c.id"
+                        :value="c.id"
+                    >
+                        {{ c.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Grupo Étnico*</label>
+                <select v-model="form.ethnic_group_id" required>
+                    <option disabled value="">Selecione</option>
+                    <option 
+                        v-for="e in ethnicGroupsStore.state.ethnicGroups"
+                        :key="e.id"
+                        :value="e.id"
+                    >
+                        {{ e.name }}
+                    </option>
+                </select>
             </div>
         </div>
-        <div class="botoes-cadastro">
+
+        <!-- ================
+             CAMPOS DA LOCATION
+        ================== -->
+        <div class="terceira-parte-form">
+            <h3>Localização</h3>
+
             <div>
-                <button class="delete" type="button">Excluir</button>
+                <label>Nome*</label>
+                <input v-model="locationForm.name" required />
             </div>
+
             <div>
-                <button class="add" type="submit">Adicionar ao acervo</button>
+                <label>Cidade*</label>
+                <input v-model="locationForm.city" required />
             </div>
+
+            <div>
+                <label>Estado*</label>
+                <input v-model="locationForm.state" required />
+            </div>
+
+            <div>
+                <label>País*</label>
+                <input v-model="locationForm.country" required />
+            </div>
+
+            <div>
+                <label>Sala / Room*</label>
+                <input v-model="locationForm.room" required />
+            </div>
+
+            <div>
+                <label>Prateleira / Shelf*</label>
+                <input v-model="locationForm.shelf" required />
+            </div>
+
+            <div>
+                <label>Estante / Bookcase*</label>
+                <input v-model="locationForm.bookcase" required />
+            </div>
+
         </div>
-    </form>
+    </div>
+
+    <div class="botoes-cadastro">
+        <button class="add" type="submit">Adicionar ao acervo</button>
+    </div>
+
+</form>
 </template>
+
 
 <style>
 .container-cadastro-produto {

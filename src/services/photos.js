@@ -13,7 +13,11 @@ class PhotoService {
 
     async create(data) {
         try {
-            const response = await api.post(`/photos`, data)
+            const response = await api.post('/photos', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
             return response
         } catch (error) {
             console.error(error)
@@ -32,4 +36,4 @@ class PhotoService {
     }
 }
 
-export default new PhotoServicew()
+export default new PhotoService()
