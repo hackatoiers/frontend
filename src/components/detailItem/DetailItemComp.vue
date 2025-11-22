@@ -22,4 +22,10 @@ section {
     border: 1px solid #E2E8F0;
     border-radius: 1rem;
 }
+@media screen and (max-width: 1024px) {
+    section {
+        grid-template-columns: 1fr; 
+    }
+    
+}
 </style>
