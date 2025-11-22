@@ -1,4 +1,10 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useUsersStore } from '@/stores/users';
+const usersStore = useUsersStore();
+onMounted(async () => {
+    await usersStore.fetchAll();
+});
 // import SearchInputa from './SearchInputa.vue';
 
 const users = [
@@ -45,8 +51,8 @@ const users = [
     </div>
  </div>
     <div class="list">
-        <div class="item" v-for="user in users" :key="user.id">
-            <p class="p1">Email</p>
+        <div class="item" v-for="user in usersStore.state.users" :key="user.id">
+            <p class="p1">{{ user.name }}</p>
             <div class="line"></div>
             <p class="p2">{{ user.email }}</p>
             <div class="btns">

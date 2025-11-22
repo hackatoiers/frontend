@@ -5,6 +5,7 @@ import { useItemStore } from '@/stores/items';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
+
 const route = useRoute();
 const itemStore = useItemStore();
 
@@ -27,7 +28,7 @@ const slides = computed(() => {
         <span></span>
         <div class="buttons">
         <button class="reserve">Reservado</button>
-        <button class="delete">Excluir</button>
+        <button class="delete" @click="itemStore.remove(itemStore.state.currentItem?.data?.id)">Excluir</button>
         <button class="edit">Editar</button>
         </div>
     </section>

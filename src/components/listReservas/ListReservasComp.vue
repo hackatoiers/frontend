@@ -1,34 +1,14 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useReserveStore } from '@/stores/reserves';
+// import { ref } from 'process';
 
 const reserveStore = useReserveStore();
-
-const reserves = ref([]);
-
+// const a = ref(null)
+// import SearchInputa from './SearchInputa.vue';
 onMounted(async () => {
-    await reserveStore.fetchAll();
+    await  reserveStore.fetchAll();
 });
-
-watch(
-    () => reserveStore.state.reserves,
-    (newReserves) => {
-        newReserves.forEach((reserve) => {
-            reserve.reserved_at = formatDate(reserve.reserved_at);
-            reserve.deadline_at = formatDate(reserve.deadline_at);
-        });
-            function formatDate(dateString) {
-                const date = new Date(dateString);
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            }
-
-        reserves.value = newReserves;
-    },
-    { immediate: true }
-);
 
 function handleSend(id) {
     if(confirm("Tem certeza que deseja deletar esta reserva?")) {
@@ -45,8 +25,8 @@ function handleSend(id) {
     </div>
  </div>
     <div class="list">
-        <div class="item" v-for="user in reserves" :key="user.id">
-            <p class="p1">Email</p>
+        <div class="item" v-for="user in reserveStore.state.reserves" :key="user.id">
+            <p class="p1">Item: {{ user.item_id }}</p>
             <div class="line"></div>
             <p class="p2">{{ user.user_email }}</p>
             <p class="a">{{ user.reserved_at }} - {{ user.deadline_at }}</p>
@@ -65,7 +45,7 @@ function handleSend(id) {
     padding: 1rem;
 }
 .p2{
-    width: 60%;
+    width: 40%;
     font-weight: lighter;
     height: 100%;
     /* border-right: 2px solid #E2E8F0; */
@@ -122,8 +102,8 @@ function handleSend(id) {
 }
 .item{
     width: 100%;
-    height: 4rem;
-    flex-wrap: wrap;
+    height: 5rem;
+    flex-wrap: no-wrap;
     border: 1px solid #E2E8F0;
     border-radius: .5rem;
     /* padding: 1rem; */
