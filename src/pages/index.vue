@@ -9,10 +9,12 @@
 // const auth = useAuth();
 // import ClassesComp from '@/components/classes/ClassesComp.vue';
 // import CadastroPComp from '@/components/cadastrar-produto/CadastroPComp.vue';
+// import ModalReservaComp from '@/components/modal-reserva/ModalReservaComp.vue';
 </script>
 <template>
-HOME
+    HOME
     <!-- <CadastroPComp /> -->
+    <!-- <ModalReservaComp :open="true" /> -->
     <!-- <Card /> -->
     <!-- <ClassesComp /> -->
     <!-- <DetailItemComp /> -->
