@@ -1,6 +1,7 @@
 <script setup>
 import CarrousselImg from '@/components/detailItem/CarrousselImg.vue';
 import TextItem from '@/components/detailItem/TextItem.vue';
+import router from '@/router';
 import { useItemStore } from '@/stores/items';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
@@ -28,7 +29,7 @@ const slides = computed(() => {
         <span></span>
         <div class="buttons">
         <button class="reserve">Reservado</button>
-        <button class="delete" @click="itemStore.remove(itemStore.state.currentItem?.data?.id)">Excluir</button>
+        <button class="delete" @click="itemStore.remove(itemStore.state.currentItem?.data?.id); router.push('/itens')">Excluir</button>
         <button class="edit">Editar</button>
         </div>
     </section>

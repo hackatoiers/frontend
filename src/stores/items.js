@@ -20,7 +20,7 @@ export const useItemStore = defineStore('item', () => {
         )
     })
 
-    async function fetchAll(page = 1, perPage = 10) {
+    async function fetchAll(page = 1, perPage = 999) {
         try {
             const response = await ItemService.fetchAll(page, perPage)
             state.items.value = response.data.data
