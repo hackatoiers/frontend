@@ -1,4 +1,5 @@
 <script setup>
+// import DetailItemAdmin from '@/components/detailItem/DetailItemAdmin.vue';
 //import HomeSection3 from '@/components/HomeSection3.vue';
 // import DetailItemComp from '@/components/detailItem/DetailItemComp.vue';
 // import HeaderComp from '@/components/header/HeaderComp.vue';
@@ -12,7 +13,9 @@
 // import ModalReservaComp from '@/components/modal-reserva/ModalReservaComp.vue';
 </script>
 <template>
-    HOME
+HOME
+<!--<DetailItemAdmin/> -->
+    <!--<CadastroPComp /> -->
     <!-- <CadastroPComp /> -->
     <!-- <ModalReservaComp :open="true" /> -->
     <!-- <Card /> -->
