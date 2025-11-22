@@ -1,56 +1,40 @@
 <script setup>
-// import SearchInputa from './SearchInputa.vue';
+import { ref, onMounted, watch } from 'vue';
+import { useReserveStore } from '@/stores/reserves';
 
-const users = [
-    {
-        id: 1,
-        email: 'Fofuxo@gmail.com',
-        entrega: '12/12/2012',
-        devolucao: '19/12/2012',
+const reserveStore = useReserveStore();
+
+const reserves = ref([]);
+
+onMounted(async () => {
+    await reserveStore.fetchAll();
+});
+
+watch(
+    () => reserveStore.state.reserves,
+    (newReserves) => {
+        newReserves.forEach((reserve) => {
+            reserve.reserved_at = formatDate(reserve.reserved_at);
+            reserve.deadline_at = formatDate(reserve.deadline_at);
+        });
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+
+        reserves.value = newReserves;
     },
-    {
-        id: 2,
-        email: 'Fofuxo@gmail.com',
-        entrega: '12/12/2012',
-        devolucao: '19/12/2012',
-    },
-    {
-        id: 3,
-        email: 'Fofuxo@gmail.com',
-        entrega: '12/12/2012',
-        devolucao: '19/12/2012',
-    },
-    {
-        id: 4,
-        email: 'Fofuxo@gmail.com',
-        entrega: '12/12/2012',
-        devolucao: '19/12/2012',
-    },
-    {
-        id: 5,
-        email: 'Fofuxo@gmail.com',
-        entrega: '12/12/2012',
-        devolucao: '19/12/2012',
-    },
-    {
-        id: 6,
-        email: 'Fofuxo@gmail.com',
-        entrega: '12/12/2012',
-        devolucao: '19/12/2012',
-    },
-    {
-        id: 7,
-        email: 'Fofuxo@gmail.com',
-        entrega: '12/12/2012',
-        devolucao: '19/12/2012',
-    },
-    {
-        id: 8,
-        email: 'Fofuxo@gmail.com',
-        entrega: '12/12/2012',
-        devolucao: '19/12/2012',
-    },
-]        
+    { immediate: true }
+);
+
+function handleSend(id) {
+    if(confirm("Tem certeza que deseja deletar esta reserva?")) {
+        reserveStore.remove(id);
+    }
+}
 </script>
 <template>
 <div class="container">
@@ -61,14 +45,14 @@ const users = [
     </div>
  </div>
     <div class="list">
-        <div class="item" v-for="user in users" :key="user.id">
+        <div class="item" v-for="user in reserves" :key="user.id">
             <p class="p1">Email</p>
             <div class="line"></div>
-            <p class="p2">{{ user.email }}</p>
-            <p class="a">{{ user.entrega }} - {{ user.devolucao }}</p>
+            <p class="p2">{{ user.user_email }}</p>
+            <p class="a">{{ user.reserved_at }} - {{ user.deadline_at }}</p>
             <div class="btns">
                 <button class="more">ver</button>
-                <button class="del"><img src="/trash-2.svg" alt=""></button>
+                <button @click="handleSend(user.id)" class="del"><img src="/trash-2.svg" alt=""></button>
             </div>
         </div>
     </div>
