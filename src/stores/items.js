@@ -1,6 +1,6 @@
 import { base64Serializer } from '@/utils/store/serializers/base64'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useStorage } from '@vueuse/core'
 import ItemService from '@/services/items'
 
@@ -10,7 +10,15 @@ export const useItemStore = defineStore('item', () => {
         currentItem: ref(null),
         checked: ref(false),
         meta: ref({}),
+        search: ref(''),
     }
+
+    const filteredItems = computed(() => {
+        if (!state.search.value) return state.items.value
+        return state.items.value.filter(item =>
+            item.name?.toLowerCase().includes(state.search.value.toLowerCase())
+        )
+    })
 
     async function fetchAll(page = 1, perPage = 10) {
         try {
@@ -76,5 +84,6 @@ export const useItemStore = defineStore('item', () => {
         create,
         update,
         remove,
+        filteredItems,
     }
 })

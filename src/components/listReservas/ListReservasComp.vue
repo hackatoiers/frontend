@@ -21,11 +21,11 @@ function handleSend(id) {
     <p class="text">Reservas</p>
     <div class="line-input">
         <img src="/search.svg" alt="">
-        <input type="text" placeholder="Buscar usuário...">
+        <input type="text" placeholder="Buscar usuário..." v-model="reserveStore.state.search">
     </div>
  </div>
     <div class="list">
-        <div class="item" v-for="user in reserveStore.state.reserves" :key="user.id">
+        <div class="item" v-for="user in reserveStore.filteredReserves" :key="user.id">
             <p class="p1">Item: {{ user.item_id }}</p>
             <div class="line"></div>
             <p class="p2">{{ user.user_email }}</p>

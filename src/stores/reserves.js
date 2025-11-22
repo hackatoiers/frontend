@@ -1,6 +1,6 @@
 import { base64Serializer } from '@/utils/store/serializers/base64'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useStorage } from '@vueuse/core'
 import ReserveService from '@/services/reserves'
 
@@ -10,8 +10,15 @@ export const useReserveStore = defineStore('reserve', () => {
         currentReserve: ref(null),
         checked: ref(false),
         meta: ref({}),
+        search: ref(''),
     }
 
+    const filteredReserves = computed(() => {
+            if (!state.search.value) return state.reserves.value
+            return state.reserves.value.filter(reserve =>
+                reserve.user_email?.toLowerCase().includes(state.search.value.toLowerCase())
+            )
+        })
     async function fetchAll(page = 1, perPage = 10) {
         try {
             const response = await ReserveService.fetchAll(page, perPage)
@@ -76,5 +83,6 @@ export const useReserveStore = defineStore('reserve', () => {
         create,
         update,
         remove,
+        filteredReserves,
     }
 })

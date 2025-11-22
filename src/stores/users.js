@@ -1,6 +1,6 @@
 import { base64Serializer } from '@/utils/store/serializers/base64'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useStorage } from '@vueuse/core'
 import UsersService from '@/services/users'
 
@@ -10,8 +10,15 @@ export const useUsersStore = defineStore('users', () => {
         currentUsers: ref(null),
         checked: ref(false),
         meta: ref({}),
+        search: ref(''),
     }
 
+    const filteredUsers = computed(() => {
+                if (!state.search.value) return state.users.value
+                return state.users.value.filter(user =>
+                    user.email?.toLowerCase().includes(state.search.value.toLowerCase())
+                )
+            })
     async function fetchAll(page = 1, perPage = 10) {
         try {
             const response = await UsersService.fetchAll(page, perPage)
@@ -76,5 +83,6 @@ export const useUsersStore = defineStore('users', () => {
         create,
         update,
         remove,
+        filteredUsers,
     }
 })
