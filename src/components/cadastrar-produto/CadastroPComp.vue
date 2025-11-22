@@ -1,4 +1,29 @@
 <script setup>
+import { useItemStore } from '@/stores/items';
+import { useCollectionStore } from '@/stores/collections';
+import { useSubTypeStore } from '@/stores/subtype';
+import { onMounted } from 'vue';
+
+const itemStore = useItemStore();
+const collectionStore = useCollectionStore();
+const subTypeStore = useSubTypeStore();
+
+const form = {
+    name: '',
+    description: '',
+    location: '',
+    provenance: '',
+    condition: '',
+    weight: null,
+    materialType: '',
+    subGroup: ''
+};
+
+onMounted(async () => {
+    await collectionStore.fetchAll();
+    await subTypeStore.fetchAll();
+});
+
 </script>
 
 <template>
@@ -27,14 +52,33 @@
                     <input class="desc" type="text" placeholder="Escreva sua descrição aqui" />
                 </div>
                 <div>
-                    <label>Sala</label>
-                    <input type="text" placeholder="Escreva a localização aqui" />
+                    <label>Numero*</label>
+                    <input class="desc" type="text" placeholder="Escreva o numero aqui" />
                 </div>
                 <div>
-                    <label>Procedência (Local de Coleta)</label>
-                    <input type="text" placeholder="Escreva a localização aqui" />
+                    <label>Comprimento</label>
+                    <input type="text" placeholder="Escreva o comprimento aqui" />
                 </div>
-
+                <div>
+                    <label>Largura</label>
+                    <input type="text" placeholder="Escreva o comprimento aqui" />
+                </div>
+                <div>
+                    <label>Altura</label>
+                    <input type="text" placeholder="Escreva a altura aqui" />
+                </div>
+                <div>
+                    <label>Cidade</label>
+                    <input type="text" placeholder="Escreva a cidade aqui" />
+                </div>
+                <div>
+                    <label>Estado</label>
+                    <input type="text" placeholder="Escreva o estado aqui" />
+                </div>
+                <div>
+                    <label>País</label>
+                    <input type="text" placeholder="Escreva o país aqui" />
+                </div>
 
                 <div class="select-option">
                     <label class="b">Estado</label>
@@ -59,10 +103,6 @@
                         <label>Peso</label>
                         <input type="number" placeholder="Escreva o peso aqui" />
                     </div>
-                    <div>
-                        <label>Nome</label>
-                        <input type="number" placeholder="Escreva o número aqui" />
-                    </div>
                 </div>
                 <div class="selects-terceira-parte">
                     <div class="custom-select">
@@ -77,10 +117,46 @@
                     <div class="custom-select">
                         <select name="estado2">
                             <option value="" disabled selected>Sub-Grupo</option>
-                            <option value="ruim">Todos os campos do banco</option>
+                            <option v-for="subtype in subTypeStore.state.subtypes" :key="subtype.id" :value="subtype.id">
+                                {{ subtype.name }}
+                            </option>
                         </select>
                     </div>
                 </div>
+                <div>
+                    <label>Sala</label>
+                    <input type="text" placeholder="Escreva a sala aqui" />
+                </div>
+                <div>
+                    <label>Estante</label>
+                    <input type="text" placeholder="Escreva a estante aqui" />
+                </div>
+                <div>
+                    <label>Prateleira</label>
+                    <input type="text" placeholder="Escreva a prateleira aqui" />
+                </div>
+                <div>
+                    <label>Tecnico</label>
+                    <input type="text" placeholder="Escreva o nome do técnico aqui" />
+                </div>
+
+                <div>
+                    <label>Referencia</label>
+                    <input type="text" placeholder="Escreva a referência aqui" />
+                </div>
+                <div>
+                    <label>Sitio</label>
+                    <input type="text" placeholder="Escreva o sitio aqui" />
+                </div>
+                <div class="custom-select">
+                    <select name="estado1">
+                        <option value="" disabled selected>Selecione a coleção</option>
+                        <option v-for="collection in collectionStore.state.collections" :key="collection.id" :value="collection.id">
+                            {{ collection.name }}
+                        </option>
+                    </select>
+                </div>
+
             </div>
         </div>
         <div class="botoes-cadastro">
@@ -130,7 +206,8 @@
 .primeira-parte-form,
 .segunda-parte-form,
 .terceira-parte-form {
-    flex: 1 1 300px; /* cresce, encolhe, base mínima 300px */
+    flex: 1 1 300px;
+    /* cresce, encolhe, base mínima 300px */
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -298,5 +375,4 @@ option {
         width: 100%;
     }
 }
-
 </style>
