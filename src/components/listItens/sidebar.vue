@@ -8,6 +8,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { onMounted, ref, watch } from 'vue';
+import { useMaterialStore } from '@/stores/materials';
+
+const materialStore = useMaterialStore();
+
+onMounted(async () => {
+    await materialStore.fetchAll();
+});
+
+const items = ref([]);
+watch(
+    () => materialStore.state.materials,
+    (newItems) => {
+        items.value = newItems;
+    },
+    { immediate: true }
+);
+
 const categories = [
     {
         id: 1, name: 'Category 1',
@@ -36,7 +54,7 @@ const categories = [
     <SelectContent class="w-[285px]">
       <SelectGroup class="fe">
         <SelectLabel class="ai">Matéria Prima</SelectLabel>
-        <SelectItem v-for="cat in categories" :key="cat.id" :value="cat.id" class="ai">
+        <SelectItem v-for="cat in items" :key="cat.id" :value="cat.id" class="ai">
           {{ cat.name }}
         </SelectItem>
       </SelectGroup>

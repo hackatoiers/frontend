@@ -1,32 +1,38 @@
 <script setup>
-import {ref} from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import Card from '@/components/card.vue';
 import searchInput from './searchInput.vue';
+import { useItemStore } from '@/stores/items';
 
-const items = ref([
-    { id: 1, name: 'Item 1', desc: 'Description for Item 1', img: '/map-pin.svg' },
-    { id: 2, name: 'Item 2', desc: 'Description for Item 2', img: '/map-pin.svg' },
-    { id: 3, name: 'Item 3', desc: 'Description for Item 3', img: '/map-pin.svg' },
-    { id: 1, name: 'Item 1', desc: 'Description for Item 1', img: '/map-pin.svg' },
-    { id: 2, name: 'Item 2', desc: 'Description for Item 2', img: '/map-pin.svg' },
-    { id: 3, name: 'Item 3', desc: 'Description for Item 3', img: '/map-pin.svg' },
-]);
+const itemStore = useItemStore();
+const page = ref(1);
+const perPage = ref(10);
+
+onMounted(async () => {
+    await itemStore.fetchAll(page.value, perPage.value);
+});
+
+const items = ref([]);
+watch(
+    () => itemStore.state.items,
+    (newItems) => {
+        items.value = newItems;
+    },
+    { immediate: true }
+);
 </script>
+
 <template>
     <div>
-        <searchInput /> 
+        <searchInput />
     </div>
-        <div class="list">
-            <Card 
-                v-for="item in items" 
-                :key="item.id" 
-                :title="item.name" 
-                :description="item.desc" 
-                :image="item.img" 
-                :descriptionLimit="50"
-            />
-        </div>
+
+    <div class="list">
+        <Card v-for="item in items" :key="item.id" :title="item.name" :description="item.description"
+            :image="item.photos?.[0] || '/map-pin.svg'" :descriptionLimit="50" />
+    </div>
 </template>
+
 <style scoped>
 .list {
     display: flex;
