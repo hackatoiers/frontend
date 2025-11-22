@@ -9,9 +9,11 @@
 // const auth = useAuth();
 // import ClassesComp from '@/components/classes/ClassesComp.vue';
 // import CadastroPComp from '@/components/cadastrar-produto/CadastroPComp.vue';
+// import SectionCards from '@/components/sectionCards.vue';
 </script>
 <template>
-HOME
+  HOME
+<!-- <SectionCards /> -->
     <!-- <CadastroPComp /> -->
     <!-- <Card /> -->
     <!-- <ClassesComp /> -->
