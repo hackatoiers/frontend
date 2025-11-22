@@ -9,8 +9,7 @@ const props = defineProps({
   title: { type: String, default: 'Fóssil' },
   description: {
     type: String,
-    default:
-      'loren ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    default: 'loren ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.loren ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
   image: { type: String, default: '' },
   descriptionLimit: { type: Number, default: 120 },
@@ -20,86 +19,27 @@ const truncatedDescription = computed(() => {
   const desc = props.description || ''
   const limit = Math.max(0, props.descriptionLimit || 0)
   if (!limit) return desc
-  return desc.length > limit
-    ? desc.slice(0, limit).trimEnd() + '...'
-    : desc
+  return desc.length > limit ? desc.slice(0, limit).trimEnd() + '...' : desc
 })
 </script>
 
 <template>
   <div>
-    <Card class="card-container">
-      <img :src="props.image" :alt="props.title" class="image" />
-      <div class="content-wrapper">
-        <CardContent class="content">
-          <CardTitle class="title">
-            {{ props.title }}
-          </CardTitle>
-          <CardDescription class="description">
-            {{ truncatedDescription }}
-          </CardDescription>
-        </CardContent>
-        <CardFooter class="footer">
-          <Button class="button">
-            Ver mais
-          </Button>
-        </CardFooter>
+    <Card class="w-[320px] rounded-xl">
+      <div class="px-4">
+        <img :src="props.image" :alt="props.title" class="w-full h-70 object-cover block rounded-lg" />
       </div>
+      <CardContent>
+        <CardTitle class="text-base font-bold">{{ props.title }}</CardTitle>
+        <CardDescription class="text-sm mt-1 line-clamp-2">
+          {{ truncatedDescription }}
+        </CardDescription>
+      </CardContent>
+      <CardFooter>
+        <Button variant="" class="w-full hover:bg-[#554F48] text-white cursor-pointer bg-[#554F48]">
+          Ver mais
+        </Button>
+      </CardFooter>
     </Card>
   </div>
 </template>
-
-<style scoped>
-.card-container {
-  width: 320px;
-  height: 448px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.image {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  display: block;
-}
-
-.content-wrapper {
-  padding: 5px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.content {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.footer {
-  padding: 0;
-}
-
-.button {
-  width: 100%;
-  background: #554F48;
-  cursor: pointer;
-}
-
-.button:hover {
-  background: #403B36;
-}
-
-.title {
-  font-weight: bold;
-}
-
-.description {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>

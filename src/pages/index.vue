@@ -7,9 +7,10 @@
 // import { RouterLink } from 'vue-router';
 // const auth = useAuth();
 // import ClassesComp from '@/components/classes/ClassesComp.vue';
+import CadastroPComp from '@/components/cadastrar-produto/CadastroPComp.vue';
 </script>
 <template>
-    HOME
+    <CadastroPComp />
     <!-- <Card /> -->
     <!-- <ClassesComp /> -->
     <!-- <DetailItemComp /> -->
