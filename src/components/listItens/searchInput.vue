@@ -1,9 +1,12 @@
 <script setup>
+import { useItemStore } from '@/stores/items';
+
+const itemStore = useItemStore();
 </script>
 <template>
 <div class="cont-input">
     <img src="/search.svg" alt="">
-    <input type="text" placeholder="Buscar item...">
+    <input type="text" placeholder="Buscar item..." v-model="itemStore.state.search">
 </div>
 </template>
 <style scoped>

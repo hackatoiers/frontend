@@ -47,11 +47,11 @@ const users = [
     <p class="text">Usuários</p>
     <div class="line-input">
         <img src="/search.svg" alt="">
-        <input type="text" placeholder="Buscar usuário...">
+        <input type="text" placeholder="Buscar usuário..." v-model="usersStore.state.search">
     </div>
  </div>
     <div class="list">
-        <div class="item" v-for="user in usersStore.state.users" :key="user.id">
+        <div class="item" v-for="user in usersStore.filteredUsers" :key="user.id">
             <p class="p1">{{ user.name }}</p>
             <div class="line"></div>
             <p class="p2">{{ user.email }}</p>

@@ -6,7 +6,7 @@ import { useItemStore } from '@/stores/items';
 
 const itemStore = useItemStore();
 const page = ref(1);
-const perPage = ref(10);
+const perPage = ref(999);
 
 onMounted(async () => {
     await itemStore.fetchAll(page.value, perPage.value);
@@ -28,7 +28,7 @@ watch(
     </div>
 
     <div class="list">
-        <Card v-for="item in items" :key="item.id" :id="item.id" :title="item.name" :description="item.description"
+        <Card v-for="item in itemStore.filteredItems" :key="item.id" :id="item.id" :title="item.name" :description="item.description"
             :image="item.photos?.[0] || '/map-pin.svg'" :descriptionLimit="50" />
     </div>
 </template>
@@ -38,5 +38,8 @@ watch(
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
+    height: 94vh;
+    overflow-y: scroll;
+    margin: 1rem 0 5rem 0;
 }
 </style>
