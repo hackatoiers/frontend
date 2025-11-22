@@ -17,6 +17,7 @@ HOME
 <!--<DetailItemAdmin/> -->
     <!--<CadastroPComp /> -->
     <!-- <CadastroPComp /> -->
+    <!-- <CadastroPComp /> -->
     <!-- <ModalReservaComp :open="true" /> -->
     <!-- <Card /> -->
     <!-- <ClassesComp /> -->
