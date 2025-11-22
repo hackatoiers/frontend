@@ -96,75 +96,58 @@
 
 <style>
 .container-cadastro-produto {
-    width: 1760px;
-    height: 800px;
+    width: 90%;
+    max-width: 1760px;
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    margin: 2rem;
+    margin: 2rem auto;
     border-radius: 10px;
     border: 2px solid #E2E8F0;
+    box-sizing: border-box;
 }
 
 .dados-cadastro-produto {
     width: 100%;
-    height: 90%;
-    background-color: white;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background-color: white;
     border-radius: 10px;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .botoes-cadastro {
     width: 100%;
-    height: 10%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
-.primeira-parte-form {
-    width: 35%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border-radius: 10px;
-}
-
-.segunda-parte-form {
-    width: 35%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border-radius: 10px;
-}
-
+.primeira-parte-form,
+.segunda-parte-form,
 .terceira-parte-form {
-    width: 25%;
-    height: 55%;
+    flex: 1 1 300px; /* cresce, encolhe, base mínima 300px */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 1rem;
     border-radius: 10px;
+    min-width: 250px;
 }
 
 .terceira-parte-form div {
     display: flex;
-    height: 8rem;
     flex-direction: column;
     gap: 0.5rem;
 }
-
 
 .imagem-primaria-container {
     width: 100%;
     height: 75%;
     border-radius: 10px;
-
 }
 
 .imagens-secundarias-container {
@@ -206,6 +189,7 @@ textarea {
     border: 1px solid #CBD5E1;
     padding: 0.5rem;
     font-size: 16px;
+    box-sizing: border-box;
 }
 
 .desc {
@@ -222,7 +206,6 @@ input::placeholder {
     flex-direction: column;
     gap: 0.5rem;
 }
-
 
 .select-option {
     display: flex;
@@ -296,4 +279,24 @@ option {
     cursor: pointer;
     transition: 0.25s ease;
 }
+
+@media screen and (max-width: 1400px) {
+    .dados-cadastro-produto {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .dados-cadastro-produto {
+        flex-direction: column;
+    }
+
+    .primeira-parte-form,
+    .segunda-parte-form,
+    .terceira-parte-form {
+        width: 100%;
+    }
+}
+
 </style>
