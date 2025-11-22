@@ -1,4 +1,5 @@
 <script setup>
+//import HomeSection3 from '@/components/HomeSection3.vue';
 // import DetailItemComp from '@/components/detailItem/DetailItemComp.vue';
 // import HeaderComp from '@/components/header/HeaderComp.vue';
 // import Card from '@/components/card.vue';
