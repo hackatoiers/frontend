@@ -10,7 +10,6 @@ let mouseMoveHandler;
 let handleScroll;
 
 onMounted(() => {
-    // scroll handler
     handleScroll = () => {
         const c1 = conchas.value;
         const scrollY = window.scrollY || window.pageYOffset || 0;
@@ -19,7 +18,6 @@ onMounted(() => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // interactive bubble
     const interBubble = interactiveEl.value;
     let curX = 0;
     let curY = 0;
@@ -100,9 +98,9 @@ onBeforeUnmount(() => {
                 <defs>
                     <filter id="goo">
                         <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  
-                                    0 1 0 0 0  
-                                    0 0 1 0 0  
+                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0
+                                    0 1 0 0 0
+                                    0 0 1 0 0
                                     0 0 0 18 -8" result="goo" />
                         <feBlend in="SourceGraphic" in2="goo" />
                     </filter>

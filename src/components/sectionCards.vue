@@ -1,41 +1,33 @@
 <script setup>
 import Card from '@/components/card.vue'
+import { useItemStore } from '@/stores/items'
+import { computed } from 'vue'
 
-const props = defineProps({
-  cards: {
-    type: Array,
-    default: () => [
-      {
-        title: "Fóssil A",
-        description: "Lorem ipsum...",
-        image: "/download.jpeg"
-      },
-      {
-        title: "Fóssil B",
-        description: "Avatar é isso aquilo q preciso que toi pq isso é um teste então vamos ver se esta tuudo certo mesmo",
-        image: "/download.jpeg"
-      },
-      {
-        title: "Fóssil C",
-        description: "Lorem ipsum...",
-        image: "/download.jpeg"
-      }, {
-        title: "Fóssil D",
-        description: "Lorem ipsum...",
-        image: "/download.jpeg"
-      },
-    ],
-  },
-})
-const cards = props.cards
+const itens = useItemStore().state;
+
+const cards = computed(() => {
+  const allItems = Array.isArray(itens.items) ? itens.items : Object.values(itens.items);
+
+  const shuffled = [...allItems].sort(() => 0.5 - Math.random());
+
+  return shuffled.slice(0, 4);
+});
 </script>
 
 <template>
   <div class="section-container">
-    <Card v-for="(card, index) in cards" :key="index" :title="card.title" :description="card.description"
-      :image="card.image" :descriptionLimit="card.descriptionLimit" />
+    <Card
+      v-for="(card, index) in cards"
+      :id="card.id"
+      :key="index"
+      :title="card.name"
+      :description="card.description"
+      :image="card.photos?.[0]"
+      :descriptionLimit="card.descriptionLimit"
+    />
   </div>
 </template>
+
 
 <style scoped>
 .section-container {

@@ -39,7 +39,7 @@ export const usePhotosStore = defineStore('photos', () => {
     async function create(data) {
         try {
             const response = await PhotosService.create(data)
-            await fetchAll()
+            //await fetchAll()
             return response
         } catch (err) {
             console.error(err)
@@ -50,7 +50,7 @@ export const usePhotosStore = defineStore('photos', () => {
     async function update(data) {
         try {
             const response = await PhotosService.update(data)
-            await fetchAll()
+            //await fetchAll()
             return response
         } catch (err) {
             console.error(err)
@@ -61,7 +61,7 @@ export const usePhotosStore = defineStore('photos', () => {
     async function remove(id) {
         try {
             const response = await PhotosService.delete(id)
-            await fetchAll()
+            //await fetchAll()
             return response
         } catch (err) {
             console.error(err)
