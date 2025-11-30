@@ -7,10 +7,15 @@ import ListUsersComp from '@/components/listUsers/ListUsersComp.vue';
     <HeaderComp :forceScrolled="true" />
     </div>
     <ListUsersComp />
+    <span></span>
     <Footer />
 </template>
 <style scoped>
 .ai{
     height: 70px;
+}
+span {
+    display: block;
+    height: 80px;
 }
 </style>

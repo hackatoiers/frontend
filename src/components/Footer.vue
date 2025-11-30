@@ -40,7 +40,7 @@
         <span>SAMBAQUI</span>
       </div>
       <div class="layer grama" ref="grama">
-        <img src="/public/Frente.png" alt="Grama" />
+        <!-- <img src="/public/Frente.png" alt="Grama" /> -->
         <div class="footer-links">
           <h2>Links</h2>
 
@@ -88,8 +88,10 @@
 .footer {
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 40vh;
   overflow: hidden;
+  /* background: linear-gradient(360deg, #FF3F3F, #fff ); */
+  background-color: #FF3F3F;
 }
 .layer {
   position: absolute;

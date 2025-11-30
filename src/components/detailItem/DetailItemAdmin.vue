@@ -1,9 +1,11 @@
 <script setup>
+import ModalAddReserve from '../ModalAddReserve.vue';
 import CarrousselImg from '@/components/detailItem/CarrousselImg.vue';
 import TextItem from '@/components/detailItem/TextItem.vue';
 import router from '@/router';
 import { useItemStore } from '@/stores/items';
-import { computed, onMounted } from 'vue';
+// import { open } from 'fs';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 
@@ -16,7 +18,7 @@ onMounted(async () => {
     await itemStore.fetchById(id);
 
 });
-
+const openModal = ref(false);
 const slides = computed(() => {
     return itemStore.state.currentItem?.data?.photos || [];
 });
@@ -28,11 +30,12 @@ const slides = computed(() => {
         <TextItem :item="itemStore.state.currentItem?.data" />
         <span></span>
         <div class="buttons">
-        <button class="reserve">Reservado</button>
+        <button class="reserve" @click="openModal = true">Reservar</button>
         <button class="delete" @click="itemStore.remove(itemStore.state.currentItem?.data?.id); router.push('/itens')">Excluir</button>
         <button class="edit">Editar</button>
         </div>
     </section>
+    <div v-if="openModal"><ModalAddReserve @close="openModal = false" /></div>
 </template>
 <style scoped>
 section {
