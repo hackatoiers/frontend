@@ -2,6 +2,7 @@
 </script>
 
 <template>
+    <p class="title">Classes</p>
     <div class="container-n-classes">
         <div class="classes-comp" :style="{ backgroundImage: 'url(/animal.png)' }">
             <div class="class-info">
@@ -38,16 +39,38 @@
             </div>
         </div>
     </div>
+    <p class="sub">Outros</p>
 </template>
 <style scoped>
+.sub {
+    font-size: 20px;
+    margin: auto;
+    width: 5%;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2rem;
+    color: #24222199;
+    border-bottom: 2px solid #24222199;
+}
+.title {
+    font-size: 24px;
+    margin: auto;
+    width: 5%;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2rem;
+    color: black;
+    border-bottom: 2px solid black;
+}
 .container-n-classes {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 2rem 0;
     margin: 2rem;
-    gap: 6rem;
-    width: auto;
+    gap: 9rem;
+    width: 80%;
+    margin: 0 auto
 }
 
 .classes-comp {

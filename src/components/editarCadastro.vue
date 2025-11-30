@@ -90,7 +90,7 @@ const confirmVisible = ref(false)
   border-radius: 100%;
   background-color: #ffffff;
   border: 4px solid #ffffff;
-  margin: -105px 200px -25px auto;
+  margin: -105px 125px -25px auto;
   border: #ced1d5 1px solid;
 }
 
@@ -186,4 +186,103 @@ input {
   background-color: #41c567;
   cursor: pointer;
 }
+
+@media (min-width: 769px) and (max-width: 950px)  and (max-width: 1011px) {
+  .card {
+    max-width: 90%;
+  }
+
+  .enfeite {
+    height: 17vh;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    margin: -85px auto -20px;
+  }
+
+  .avatar img {
+    width: 65%;
+    height: 65%;
+    margin: 17.5%;
+  }
+
+  .align {
+    padding: 20px;
+  }
+
+  .form-container {
+    gap: 20px;
+  }
+
+  .btn-full,
+  .btnSair-full {
+    width: 46%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .btn-full,
+  .btnSair-full {
+    width: 100%;
+  }
+}
+
+@media (max-width: 980px) {
+  .card {
+    max-width: 90%;
+  }
+
+  .enfeite {
+    height: 15vh;
+  }
+
+  .footer {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    margin: -70px auto -18px;
+  }
+
+  .avatar img {
+    width: 70%;
+    height: 70%;
+    margin: 14%;
+  }
+
+  .align {
+    padding: 10px;
+  }
+
+  .form-container {
+    gap: 18px;
+  }
+
+  .input-with-icon .icon-button {
+    right: 5px;
+  }
+
+
+  .btn-full,
+  .btnSair-full {
+    width: 48%;
+  }
+}
+
 </style>

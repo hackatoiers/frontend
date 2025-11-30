@@ -1,3 +1,5 @@
+HeaderButton.vue:
+
 <script setup>
 const props = defineProps({
     isScrolled: {
@@ -8,7 +10,6 @@ const props = defineProps({
 </script>
 
 <template>
-    <!-- aplica a classe quando scrolled -->
     <button :class="{ 'scrolled-btn': props.isScrolled }">
         Acessar acervo
     </button>
@@ -18,22 +19,23 @@ const props = defineProps({
 button {
     padding: 10px 20px;
     background-color: transparent;
-    color: white;
-    border: 1px solid white;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
     cursor: pointer;
     transition: 0.25s ease;
+    z-index: 10;
 }
 
 /* --------- HOVER NORMAL (sem scroll) --------- */
 button:hover {
-    background-color: white;
-    color: black;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 /* --------- ESTILO QUANDO SCROLLED --------- */
 .scrolled-btn {
-    background-color: #554F48;
+    background-color: #000000;
     color: rgb(255, 255, 255);
     border: none;
 }
@@ -41,7 +43,7 @@ button:hover {
 /* --------- HOVER QUANDO SCROLLED --------- */
 .scrolled-btn:hover {
     background-color: rgba(0, 0, 0, 0);
-    color: #554F48;
-    border: 1px solid #554F48;
+    color: #000000;
+    border: 1px solid #000000;
 }
 </style>

@@ -4,8 +4,12 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import CardTitle from '@/components/ui/card/CardTitle.vue'
 import CardDescription from '@/components/ui/card/CardDescription.vue'
 import { Button } from '@/components/ui/button'
+import router from '@/router'
+import { useAuth } from '@/stores/auth';
 
+const authStore = useAuth();
 const props = defineProps({
+  id: { type: Number, required: true },
   title: { type: String, default: 'Fóssil' },
   description: {
     type: String,
@@ -40,7 +44,10 @@ const truncatedDescription = computed(() => {
           </CardDescription>
         </CardContent>
         <CardFooter class="footer">
-          <Button class="button">
+          <Button class="button" @click="router.push(`item/${props.id}`)" v-if="!authStore.state.checked">
+            Ver mais
+          </Button>
+          <Button class="button" @click="router.push(`admin/item/${props.id}`)" v-if="authStore.state.checked">
             Ver mais
           </Button>
         </CardFooter>
@@ -52,7 +59,7 @@ const truncatedDescription = computed(() => {
 <style scoped>
 .card-container {
   width: 320px;
-  height: 448px;
+  height: 440px;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -101,5 +108,6 @@ const truncatedDescription = computed(() => {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 40px; /* altura fixa */
 }
 </style>

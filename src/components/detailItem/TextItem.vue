@@ -1,4 +1,8 @@
 <script setup>
+import api from '@/plugins/api';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 const props = defineProps({
   item: {
     type: Object,
@@ -6,7 +10,7 @@ const props = defineProps({
     default: () => ({
         categoria: 'Animal',
         subcategoria: 'Ósseo humano',
-        title: 'Crânio', 
+        name: 'Crânio',
         num: '8647',
         weight: '450g',
         desc: 'Conjunto de crânio humano, composto de 03 peças, de um indivíduo adulto, com fragmento de maxila esquerda com 04 dentes, mandibula com 12 dentes todos com desgaste acentuado. Três inserções numéricas em cada peça (um da coleção Tiburitus e outro do Instituto de Antropologia IA 16).',
@@ -15,26 +19,36 @@ const props = defineProps({
     })
   }
 })
+
+const id = route.params.item_id;
+
+function handleDw() {
+    const url = api.defaults.baseURL + `/items/${id}/pdf`;
+    window.open(url, '_blank');
+}
 </script>
 <template>
     <div class="container-content">
         <div class="categorias">
-            <p>{{ item.categoria }}</p><p> > </p><p>{{ item.subcategoria }}</p>
+            <p>{{ item.sub_type?.material.name }}</p><p> > </p><p>{{ item.sub_type?.name }}</p>
         </div>
         <div class="title-num">
-            <p class="title">{{ item.title }}</p> 
-            <p class="num">N° {{ item.num }}</p>
+            <p class="title">{{ item.name }}</p>
+            <p class="num">N° {{ item.number }}</p>
         </div>
         <div class="weight">
-            <p>Peso: {{ item.weight }}</p>
+            <p>Peso: {{ item.weight }}g</p>
         </div>
-        <div class="desc"><p>{{ item.desc }}</p></div>
+        <div class="desc"><p>{{ item.description }}</p></div>
             <div class="sala">
-        <p class="bold">Sala:</p> <p>{{ item.sala }}</p>
+        <p class="bold">Sala:</p> <p>{{ item.location.room }}</p>
+        <p class="bold">Estante:</p> <p>{{ item.location.shelf }}</p>
+        <p class="bold">Prateleira:</p> <p>{{ item.location.bookcase }}</p>
+
     </div>
         <div class="bottom">
-        <p class="detail">Ver detalhes</p>
-        <p class="loc"><img src="/public/map-pin.svg" alt="">{{ item.location }}</p>
+        <p @click="handleDw" class="detail">Ver detalhes</p>
+        <p class="loc"><img src="/public/map-pin.svg" alt="">{{ item.location.city + ' - ' + item.location.state + ' - ' + item.location.country }}</p>
     </div>
 
     </div>
@@ -66,7 +80,7 @@ const props = defineProps({
 }
 .title-num {
   display: flex;
-  flex-direction: row;
+  flex-direction:     ;
   justify-content: start;
   align-items: center;
   gap: 0.5rem;
